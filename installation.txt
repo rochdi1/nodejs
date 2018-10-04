@@ -325,3 +325,41 @@ run();
 root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# node async-await
 get user from database.....
 { id: 2, gitHubusername: 'rochdi Abdelatif' }
+//****************
+async awyt avance
+function getUsers(id) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('get user from database.....');
+            resolve({
+                id: id,
+                gitHubusername: "rochdi Abdelatif"
+            })
+        }, 2000);
+    });
+}
+
+function getRepos(idUser) {
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('get a repos.....');
+            resolve(['repo1', 'repo2', 'repo3'])
+        }, 2000);
+
+    });
+}
+
+async function run(){
+    const user = await getUsers(2);
+    console.log(user);
+    const repo = await getRepos(user.id);
+    console.log(repo);
+} 
+run();
+//Output
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# node async-await
+get user from database.....
+{ id: 2, gitHubusername: 'rochdi Abdelatif' }
+get a repos.....
+[ 'repo1', 'repo2', 'repo3' ]

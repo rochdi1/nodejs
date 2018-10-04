@@ -24,5 +24,7 @@ function getRepos(idUser) {
 async function run(){
     const user = await getUsers(2);
     console.log(user);
+    const repo = await getRepos(user.id);
+    console.log(repo);
 } 
 run();

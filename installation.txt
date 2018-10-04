@@ -1,0 +1,6 @@
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# npm init --yes
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# code .
+create index.js
+// pour afficher les donnes de index.js 
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# node index
+salam mes amies

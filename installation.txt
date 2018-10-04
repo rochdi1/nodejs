@@ -67,4 +67,72 @@ before
 after
 get user from database.....
 { id: 2, gitHubusername: 'rochdi Abdelatif' }
+//*************
+// Expl Avance
 
+console.log('before');
+getUsers(2, (user) => {
+    console.log(user);
+    getRepos(user.id, (rep) => {
+        console.log(rep);
+    });
+});
+
+console.log('after');
+
+function getUsers(id, callback){
+
+    setTimeout(() => {
+        console.log('get user from database.....');
+        callback({
+            id: id,
+            gitHubusername: "rochdi Abdelatif"
+        })
+    }, 2000);
+}
+
+
+function getRepos(idUser, callback){
+
+    setTimeout(() => {
+        console.log('get a repos.....');
+        callback(['repo1', 'repo2', 'repo3'])
+    }, 2000);
+}
+//Output
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# node callback
+before
+after
+get user from database.....
+{ id: 2, gitHubusername: 'rochdi Abdelatif' }
+get a repos.....
+[ 'repo1', 'repo2', 'repo3' ]
+//*********************************
+2-solution avec promise
+create promise.js
+
+explication de promise Classe comment il fonction
+const p = new Promise((resolve, reject) => {
+   const status = false;
+  
+   if(status) {
+    // le cas favorable
+    resolve({id:1, name: 'Rochdi Abdelatif'});
+   } else {
+    // le cas defavorable on recois um message
+    reject(new Error('user is not found!'));
+   }
+
+});
+
+
+//then donne le retour favorable et le catch donne le cas defavorable
+p.then((user)=>console.log('resolve : ', user))
+ .catch((err)=>console.log('reject : ', err.message));
+
+ //Output
+ root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# node promise
+resolve :  { id: 1, name: 'Rochdi Abdelatif' }
+// status= false
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# node promise
+reject :  user is not found!

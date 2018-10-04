@@ -4,3 +4,35 @@ create index.js
 // pour afficher les donnes de index.js 
 root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# node index
 salam mes amies
+
+console.log('before');
+setTimeout(() => {
+  console.log('get user from database.....');
+}, 2000);
+console.log('after');
+
+
+//le Node js et un mode asynchrone 
+
+//*************
+console.log('before');
+const user = getUsers(2);
+console.log(user);
+console.log('after');
+
+function getUsers(id){
+
+    setTimeout(() => {
+        console.log('get user from database.....');
+        return {
+            id: id,
+            gitHubusername: "rochdi Abdelatif"
+        }
+    }, 2000);
+}
+//Output
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# node index
+before
+undefined
+after
+get user from database.....

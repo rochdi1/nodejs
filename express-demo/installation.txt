@@ -1,0 +1,43 @@
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# mkdir express-demo
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs# cd express-demo/
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs/express-demo# chmod -R 777 .
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs/express-demo# 
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs/express-demo# npm init --yes
+Wrote to /opt/lampp/htdocs/nodejs/express-demo/package.json:
+
+{
+  "name": "express-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+//*******
+//install express js
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs/express-demo# npm i express --save
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN express-demo@1.0.0 No description
+npm WARN express-demo@1.0.0 No repository field.
+
++ express@4.16.3
+added 50 packages from 47 contributors and audited 119 packages in 2.16s
+found 0 vulnerabilities
+//*******
+// create index.js
+
+// load express.js
+const express = require('express');
+// associe un variable a express librarie 
+const app = express();
+
+
+// cree un serveur
+app.listen(3000, () => { console.log('app runing on 3000 port'); });
+
+//******************

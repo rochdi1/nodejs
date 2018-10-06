@@ -57,3 +57,18 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 + nodemon@1.18.4
 added 233 packages from 136 contributors in 9.164s
+//**********
+cree un variable d environement
+#win
+set PORT=4000
+#Linux or Mac
+export PORT=4000
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs/express-demo# export PORT=4000
+root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs/express-demo# nodemon index
+[nodemon] 1.18.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching: *.*
+[nodemon] starting `node index index.js`
+app runing on 4000 port
+
+

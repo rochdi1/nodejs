@@ -1,3 +1,4 @@
+
 // load express.js
 const express = require('express');
 //
@@ -58,9 +59,28 @@ app.put('/api/courses/:id', async (req, res) => {
     course.price = req.body.price
 
     // la persistance
-    const result = await course.save();
+    const courso = await course.save();
 
      // envoyer la reponse ce genre un tableau []
+     res.send(courso)
+
+});
+
+
+app.delete('/api/courses/:idCourse', async (req, res) => {
+
+    // on recuper le id
+    const id = req.params.idCourse;
+
+    // on recuper la donne dans la base de donne
+    const course = await Course.findOne({_id: id});
+
+
+
+    // la persistance
+    const result = await course.delete();
+
+     // envoyer reponse ce genre un tableau []
      res.send(result)
 
 });

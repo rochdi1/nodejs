@@ -171,6 +171,7 @@ If you want to enable authentication, run the commands to create a new admin use
 Then run the commands below to create a new admin user
 
 > db.createUser({user:"admin", pwd:"new_password_here", roles:[{role:"root", db:"admin"}]})
+> db.createUser({user:"admin", pwd:"admin", roles:[{role:"root", db:"admin"}]})
 
 You should see a successful admin user created
 
@@ -212,6 +213,7 @@ sudo service mongod restart
 Now only authetication users will be allowed to access the database server…
 
 mongo -u admin -p new_password_here --authenticationDatabase admin
+mongo -u admin -p admin --authenticationDatabase admin
 Step 5: Completely Remove MongoDB
 
 To completely remove MongoDB from a system, you must remove the MongoDB applications themselves, the configuration files, and any directories containing data and logs.
@@ -237,8 +239,109 @@ root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs/express-demo/compass#
  Once MongoDB Compass is installed, you can open it from lubuntu start menu > Accessories > MongoDB Compass.
 
  //*************
+
+ sudo mkdir -p /data/db
+
+//*************
  cree un intermidiare entre le node js et mongodb
  s appel: "mongoose"
 
+
 root@superesa-System-Product-Name:/opt/lampp/htdocs/nodejs/express-demo# npm i mongoose --save
+
+// load express.js
+const express = require('express');
+//
+const mongoose = require('mongoose');
+// associe un variable a express librarie 
+const app = express();
+
+mongoose.connect('mongodb://127.0.0.1/school')
+        .then(() => {
+            console.log('mongodb is connected...');
+        })
+        .catch((err) => {
+            console.log(err.message);
+        })    
+
+//definir le variable courses 
+courses = ['Laravel', 'Angular', 'NodeJs', 'VueJs'];
+
+// cree API 
+app.get('/api/courses', (req, res) => {
+    // envoyer la reponse ce genre un tableau []
+    res.send(courses)
+});
+
+// cree un serveur
+// si un port configure en en .env le serveur prend le env Port si non prend 3000
+const PORT = process.env.PORT  || 3000;
+app.listen(PORT, () => { console.log(`app runing on ${ PORT } port`); });
+
+//***********
+// creation schema sur manongo db
+
+// load express.js
+const express = require('express');
+//
+const mongoose = require('mongoose');
+// associe un variable a express librarie 
+const app = express();
+
+mongoose.connect('mongodb://127.0.0.1/school')
+        .then(() => {
+            console.log('mongodb is connected...');
+        })
+        .catch((err) => {
+            console.log(err.message);
+        })    
+
+
+
+// creation de schema
+const courseSchema = mongoose.Schema({
+    name: String,
+    author: String,
+    price: Number
+});
+
+// creation de model
+const Course = mongoose.model('Course', courseSchema);
+
+
+// Middlware pour que le restapi peuve lire les donnes json 
+app.use(express.json())
+
+
+
+//definir le variable courses 
+courses = ['Laravel', 'Angular', 'NodeJs', 'VueJs'];
+
+// cree API 
+app.get('/api/courses', (req, res) => {
+    // envoyer la reponse ce genre un tableau []
+    res.send(courses)
+});
+
+
+app.post('/api/course', async (req, res) => {
+    // donner les informations au model
+    const course = new Course({
+        name: req.body.name,
+        author: req.body.author,
+        price: req.body.price
+    });
+    // persister ce objet dans la base de donne
+    const newCourse = await course.save();
+
+    res.send(newCourse)
+   
+});
+
+// cree un serveur
+// si un port configure en en .env le serveur prend le env Port si non prend 3000
+const PORT = process.env.PORT  || 3000;
+app.listen(PORT, () => { console.log(`app runing on ${ PORT } port`); });
+
+//******************************************
 

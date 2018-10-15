@@ -3,6 +3,8 @@
 const express = require('express');
 //
 const mongoose = require('mongoose');
+//
+const Joi = require('joi');
 // associe un variable a express librarie 
 const app = express();
 
@@ -88,6 +90,19 @@ app.delete('/api/courses/:idCourse', async (req, res) => {
 
 
 app.post('/api/course', async (req, res) => {
+
+    const courseValidate = {
+        name: Joi.string().min(3).required(),
+        author: Joi.string().required(),
+        price: Joi.number().required(),
+    }
+
+   resu = Joi.validate(req.body, courseValidate);
+   if(resu.error) {
+       return res.status(400).send(resu.error.details[0].message);
+   }
+  return res.send(resu);
+
     // donner les informations au model
     const course = new Course({
         name: req.body.name,

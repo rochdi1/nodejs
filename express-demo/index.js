@@ -35,10 +35,36 @@ app.use(express.json())
 courses = ['Laravel', 'Angular', 'NodeJs', 'VueJs'];
 
 // cree API 
-app.get('/api/courses', (req, res) => {
+app.get('/api/courses', async (req, res) => {
+
+    const courses = await Course.find();
+
     // envoyer la reponse ce genre un tableau []
     res.send(courses)
 });
+
+
+app.put('/api/courses/:id', async (req, res) => {
+
+    // on recuper le id
+    const id = req.params.id;
+
+    // on recuper les donne dans la base de donne
+    const course = await Course.findById(id);
+
+    // om mes les modefication des donnes
+    course.name = req.body.name,
+    course.author = req.body.author,
+    course.price = req.body.price
+
+    // la persistance
+    const result = await course.save();
+
+     // envoyer la reponse ce genre un tableau []
+     res.send(result)
+
+});
+
 
 
 app.post('/api/course', async (req, res) => {
